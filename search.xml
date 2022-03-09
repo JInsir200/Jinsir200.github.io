@@ -4,13 +4,27 @@
   
     
     <entry>
-      <title></title>
+      <title>【转】使用 EhCache 关于临时目录的一个注意事项</title>
       <link href="/2022/03/10/EhCache%E7%8E%AF%E5%A2%83%E7%9B%AE%E5%BD%95%20/"/>
       <url>/2022/03/10/EhCache%E7%8E%AF%E5%A2%83%E7%9B%AE%E5%BD%95%20/</url>
       
-        <content type="html"><![CDATA[<p>-–</p><p>title【转】使用 EhCache 关于临时目录的一个注意事项</p><p>categories:</p><p>- EhCache </p><p>tags:</p><p>- EhCache </p><p>- 配置问题</p><p>-–</p><h1 id="【转】使用-EhCache-关于临时目录的一个注意事项"><a href="#【转】使用-EhCache-关于临时目录的一个注意事项" class="headerlink" title="【转】使用 EhCache 关于临时目录的一个注意事项"></a>【转】使用 EhCache 关于临时目录的一个注意事项</h1><p>一般 <a href="https://so.csdn.net/so/search?q=ehcache&spm=1001.2101.3001.7020">ehcache</a> 的配置中默认的 diskStore 的路径设置的是 java.io.tmpdir ，等于是当前系统的临时目录。</p><p>但是在 <a href="https://so.csdn.net/so/search?q=Tomcat&spm=1001.2101.3001.7020">Tomcat</a> 和 Resin 这两个应用服务器上，临时目录是有区别的，在 Tomcat 上运行的应用通过 java.io.tmpdir 系统变量获取到的路径是<a href="http://m.oschina.net/p/tomcat">Tomcat</a> 目录下的 temp 子目录，而 <a href="http://m.oschina.net/p/resin">Resin</a> 返回的是系统的临时目录，linux下可能就是 /tmp，在 Linux 下如果我们使用的是 root 账号来启动 Tomcat 和 Resin 的话，那这个问题就不存在。但是我们非常不建议用 root 来启动 Tomcat 和 Resin，这时候我们会单独的创建一个非特权账号，假设该账号名为 www 来运行应用服务器。</p><p>我们需要将 Tomcat 和 Resin 所在的目录授权给 www 账号，这样应用服务器的日志文件才能正常的写入，但是由于 Resin 的临时目录是对应系统的 /tmp 目录，因此如果应用中使用了 ehcache 并设置了存储路径为 java.io.tmpdir ，你就会发现启动的时候报错，提示没有在 /tmp 目录下创建文件的权限，这是因为 www 账号没有写 tmp 目录的权限。</p><h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>修改 ehcache 的 diskStore 配置的值为 user.home ，将存储文件路径指定到用户的主目录下即可</p><h2 id="windows路径"><a href="#windows路径" class="headerlink" title="windows路径"></a>windows路径</h2><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220310003739608.png" alt="image-20220310003739608"></p><h2 id="Liunx路径："><a href="#Liunx路径：" class="headerlink" title="Liunx路径："></a>Liunx路径：</h2><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220310003922706.png" alt="image-20220310003922706"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="【转】使用-EhCache-关于临时目录的一个注意事项"><a href="#【转】使用-EhCache-关于临时目录的一个注意事项" class="headerlink" title="【转】使用 EhCache 关于临时目录的一个注意事项"></a>【转】使用 EhCache 关于临时目录的一个注意事项</h1><p>一般 <a href="https://so.csdn.net/so/search?q=ehcache&spm=1001.2101.3001.7020">ehcache</a> 的配置中默认的 diskStore 的路径设置的是 java.io.tmpdir ，等于是当前系统的临时目录。</p><p>但是在 <a href="https://so.csdn.net/so/search?q=Tomcat&spm=1001.2101.3001.7020">Tomcat</a> 和 Resin 这两个应用服务器上，临时目录是有区别的，在 Tomcat 上运行的应用通过 java.io.tmpdir 系统变量获取到的路径是<a href="http://m.oschina.net/p/tomcat">Tomcat</a> 目录下的 temp 子目录，而 <a href="http://m.oschina.net/p/resin">Resin</a> 返回的是系统的临时目录，linux下可能就是 /tmp，在 Linux 下如果我们使用的是 root 账号来启动 Tomcat 和 Resin 的话，那这个问题就不存在。但是我们非常不建议用 root 来启动 Tomcat 和 Resin，这时候我们会单独的创建一个非特权账号，假设该账号名为 www 来运行应用服务器。</p><p>我们需要将 Tomcat 和 Resin 所在的目录授权给 www 账号，这样应用服务器的日志文件才能正常的写入，但是由于 Resin 的临时目录是对应系统的 /tmp 目录，因此如果应用中使用了 ehcache 并设置了存储路径为 java.io.tmpdir ，你就会发现启动的时候报错，提示没有在 /tmp 目录下创建文件的权限，这是因为 www 账号没有写 tmp 目录的权限。</p><h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>修改 ehcache 的 diskStore 配置的值为 user.home ，将存储文件路径指定到用户的主目录下即可</p><h2 id="windows路径"><a href="#windows路径" class="headerlink" title="windows路径"></a>windows路径</h2><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220310003739608.png" alt="image-20220310003739608"></p><h2 id="Liunx路径："><a href="#Liunx路径：" class="headerlink" title="Liunx路径："></a>Liunx路径：</h2><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220310003922706.png" alt="image-20220310003922706"></p>]]></content>
       
       
+      <categories>
+          
+          <category> EhCache </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> EhCache </tag>
+            
+            <tag> 配置问题 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -67,13 +81,25 @@
     
     
     <entry>
-      <title></title>
+      <title>IDEA使用maven命令打包</title>
       <link href="/2022/03/10/IDEA%E4%BD%BF%E7%94%A8maven%E5%91%BD%E4%BB%A4%E6%89%93%E5%8C%85/"/>
       <url>/2022/03/10/IDEA%E4%BD%BF%E7%94%A8maven%E5%91%BD%E4%BB%A4%E6%89%93%E5%8C%85/</url>
       
         <content type="html"><![CDATA[<h1 id="IDEA使用maven命令打包"><a href="#IDEA使用maven命令打包" class="headerlink" title="IDEA使用maven命令打包"></a>IDEA使用maven命令打包</h1><p>现在IDEA是最火的java集成开发环境，经常会用到一些<a href="https://so.csdn.net/so/search?q=maven&spm=1001.2101.3001.7020">maven</a>命令进行必要的操作（例如打jar包），所以在这里做一些简单的总结</p><h2 id="1-常用打包命令："><a href="#1-常用打包命令：" class="headerlink" title="1.常用打包命令："></a>1.常用打包命令：</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package -Dmaven.test.skip=true跳过单测打包</span><br><span class="line">mvn clean install -Dmaven.test.skip=true跳过单测打包，并把打好的包上传到本地仓库</span><br><span class="line">mvn clean deploy -Dmaven.test.skip=true跳过单测打包，并把打好的包上传到远程仓库</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="2-常用命令列表："><a href="#2-常用命令列表：" class="headerlink" title="2.常用命令列表："></a>2.常用命令列表：</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mvn -v //查看版本 </span><br><span class="line">mvn archetype:create //创建 Maven 项目 </span><br><span class="line">mvn compile //编译源代码 </span><br><span class="line">mvn test-compile //编译测试代码 </span><br><span class="line">mvn test //运行应用程序中的单元测试 </span><br><span class="line">mvn site //生成项目相关信息的网站 </span><br><span class="line">mvn package //依据项目生成 jar 文件 </span><br><span class="line">mvn install //在本地 Repository 中安装 jar </span><br><span class="line">mvn -Dmaven.test.skip=true //忽略测试文档编译 </span><br><span class="line">mvn clean //清除目标目录中的生成结果 </span><br><span class="line">mvn clean compile //将.java类编译为.class文件 </span><br><span class="line">mvn clean package //进行打包 </span><br><span class="line">mvn clean test //执行单元测试 </span><br><span class="line">mvn clean deploy //部署到版本仓库 </span><br><span class="line">mvn clean install //使其他项目使用这个jar,会安装到maven本地仓库中 </span><br><span class="line">mvn archetype:generate //创建项目架构 </span><br><span class="line">mvn dependency:list //查看已解析依赖 </span><br><span class="line">mvn dependency:tree //看到依赖树 </span><br><span class="line">mvn dependency:analyze //查看依赖的工具 </span><br><span class="line">mvn help:system //从中央仓库下载文件至本地仓库 </span><br><span class="line">mvn help:active-profiles //查看当前激活的profiles </span><br><span class="line">mvn help:all-profiles //查看所有profiles </span><br><span class="line">mvn help:effective -pom //查看完整的pom信息</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>maven 命令要在IDEA的Terminal窗口执行<br>    执行maven命令需要当前目录有pom依赖，可以用cd命令切换目录</p><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220310002658226.png" alt="image-20220310002658226"></p><p>也可以使用idea,前提是maven项目</p><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220310002744603.png" alt="image-20220310002744603"></p>]]></content>
       
       
+      <categories>
+          
+          <category> maven </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> maven指令 </tag>
+            
+        </tags>
       
     </entry>
     
