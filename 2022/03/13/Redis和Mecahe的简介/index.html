@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Redis、Mecahe、EhCache的简介 | little_kim</title><meta name="keywords" content="EhCache,Redis,Mecahe"><meta name="author" content="JIn"><meta name="copyright" content="JIn"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Redis、Mecahe、EhCache的简介EhcacheEhCache - 简书 (jianshu.com) Ehcache 简介：​        EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点。是一种广泛使用的开源Java分布式缓存。主要面向通用缓存,Java EE和轻量级容器。另外Spring 提供了对缓存功能的抽象：即允许绑定不同的缓存解决方案（如Ehcache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis、Mecahe、EhCache的简介">
+<meta property="og:url" content="http://example.com/2022/03/13/Redis%E5%92%8CMecahe%E7%9A%84%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="little_kim">
+<meta property="og:description" content="Redis、Mecahe、EhCache的简介EhcacheEhCache - 简书 (jianshu.com) Ehcache 简介：​        EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点。是一种广泛使用的开源Java分布式缓存。主要面向通用缓存,Java EE和轻量级容器。另外Spring 提供了对缓存功能的抽象：即允许绑定不同的缓存解决方案（如Ehcache">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041438071.jpg">
+<meta property="article:published_time" content="2022-03-13T09:54:48.377Z">
+<meta property="article:modified_time" content="2022-03-13T12:51:14.949Z">
+<meta property="article:author" content="JIn">
+<meta property="article:tag" content="EhCache">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Mecahe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041438071.jpg"><link rel="shortcut icon" href="/./img/first.png"><link rel="canonical" href="http://example.com/2022/03/13/Redis%E5%92%8CMecahe%E7%9A%84%E7%AE%80%E4%BB%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redis、Mecahe、EhCache的简介',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-13 20:51:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-folder-ope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041438071.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">little_kim</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-folder-ope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Redis、Mecahe、EhCache的简介</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-13T09:54:48.377Z" title="发表于 2022-03-13 17:54:48">2022-03-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-13T12:51:14.949Z" title="更新于 2022-03-13 20:51:14">2022-03-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%93%E5%AD%98/">缓存</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%93%E5%AD%98/Redis/">Redis</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%93%E5%AD%98/Redis/Mecahe/">Mecahe</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%93%E5%AD%98/Redis/Mecahe/EhCache/">EhCache</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis、Mecahe、EhCache的简介"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Redis、Mecahe、EhCache的简介"><a href="#Redis、Mecahe、EhCache的简介" class="headerlink" title="Redis、Mecahe、EhCache的简介"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liang-io/p/10322718.html">Redis、Mecahe、EhCache的简介</a></h1><h2 id="Ehcache"><a href="#Ehcache" class="headerlink" title="Ehcache"></a>Ehcache</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/154c82073b07">EhCache - 简书 (jianshu.com)</a></p>
+<h5 id="Ehcache-简介："><a href="#Ehcache-简介：" class="headerlink" title="Ehcache 简介："></a>Ehcache 简介：</h5><p>​        EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点。是一种广泛使用的开源Java分布式缓存。主要面向通用缓存,Java EE和轻量级容器。另外Spring 提供了对缓存功能的抽象：即允许绑定不同的缓存解决方案（如Ehcache），但本身不直接提供缓存功能的实现。它支持注解方式使用缓存，非常方便。</p>
+<p>通过在内存里维护一个统一的巨大的hash表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存中，然后从内存中读取，从而大大提高读取速度。</p>
+<h5 id="Ehcache的特点："><a href="#Ehcache的特点：" class="headerlink" title="Ehcache的特点："></a>Ehcache的特点：</h5><p>（1）快速简单，具有多种缓存策略</p>
+<p>（2）缓存数据有两级为内存和磁盘，缓存数据会在虚拟机重启的过程中写入磁盘</p>
+<p>（3）可以通过RMI、可插入API等方式进行分布式缓存</p>
+<p>（4）具有缓存和缓存管理器的侦听接口</p>
+<p>（5）支持多缓存管理器实例，以及一个实例的多个缓存区域。并提供Hibernate的缓存实现</p>
+<h5 id="Ehcache配置："><a href="#Ehcache配置：" class="headerlink" title="Ehcache配置："></a>Ehcache配置：</h5><blockquote>
+<p>Ehcache支持通过xml文件和API两种方式进行配置。</p>
+<p>xml方式<br>Ehcache的CacheManager构造函数或工厂方法被调用时，会默认加载classpath下名为ehcache.xml的配置文件。如果加载失败，会加载Ehcache jar包中的ehcache-failsafe.xml文件，这个文件中含有简单的默认配置。</p>
+</blockquote>
+<h6 id="ehcache-xml配置参数说明"><a href="#ehcache-xml配置参数说明" class="headerlink" title="ehcache.xml配置参数说明"></a>ehcache.xml配置参数说明</h6><blockquote>
+<p>name：缓存名称。<br>maxElementsInMemory：缓存最大个数。<br>eternal：缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期。<br>timeToIdleSeconds：置对象在失效前的允许闲置时间（单位：秒）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。<br>timeToLiveSeconds：缓存数据的生存时间（TTL），也就是一个元素从构建到消亡的最大时间间隔值，这只能在元素不是永久驻留时有效，如果该值是0就意味着元素可以停顿无穷长的时间。<br>maxEntriesLocalDisk：当内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中。<br>overflowToDisk：内存不足时，是否启用磁盘缓存。<br>diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。<br>maxElementsOnDisk：硬盘最大缓存个数。<br>diskPersistent：是否在VM重启时存储硬盘的缓存数据。默认值是false。<br>diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。<br>memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。<br>clearOnFlush：内存数量最大时是否清除。</p>
+</blockquote>
+<p>　timeToLiveSeconds –&gt;当对象自从被存放到缓存中后，如果处于缓存中的时间超过了 timeToLiveSeconds属性值,这个对象就会过期，EHCache将把它从缓存中清除；即缓存自创建日期起能够存活的最长时间，单位为秒(s)</p>
+<p>　　timeToIdleSeconds –&gt;  当对象自从最近一次被访问后，如果处于空闲状态的时间超过了timeToIdleSeconds属性值，这个对象就会过期，EHCache将把它从缓存中清空；即缓存被创建后，最后一次访问时间到缓存失效之时，两者之间的间隔，单位为秒(s)</p>
+<p>　　timeToLiveSeconds必须大于timeToIdleSeconds才有意义。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ehcache.xml的一个范例</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">&quot;http://ehcache.org/ehcache.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 磁盘缓存位置 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">&quot;java.io.tmpdir/ehcache&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 默认缓存 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">defaultCache</span></span></span><br><span class="line"><span class="tag">          <span class="attr">maxEntriesLocalHeap</span>=<span class="string">&quot;10000&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">eternal</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;120&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;120&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">maxEntriesLocalDisk</span>=<span class="string">&quot;10000000&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">diskExpiryThreadIntervalSeconds</span>=<span class="string">&quot;120&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">memoryStoreEvictionPolicy</span>=<span class="string">&quot;LRU&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">persistence</span> <span class="attr">strategy</span>=<span class="string">&quot;localTempSwap&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">defaultCache</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">&quot;userCache&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">maxElementsInMemory</span>=<span class="string">&quot;1000&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">eternal</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">maxEntriesLocalDisk</span>=<span class="string">&quot;10000000&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">overflowToDisk</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">memoryStoreEvictionPolicy</span>=<span class="string">&quot;LRU&quot;</span>/&gt;</span></span><br><span class="line">&lt;/ehcache</span><br></pre></td></tr></table></figure>
+
+<h6 id="API方式"><a href="#API方式" class="headerlink" title="API方式"></a>API方式</h6><p>xml配置的参数也可以直接通过编程方式来动态的进行配置（dynamicConfig没有设为false）。</p>
+<ul>
+<li>jfianl</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Cache cache = manager.getCache(<span class="string">&quot;sampleCache&quot;</span>); </span><br><span class="line">CacheConfiguration config = cache.getCacheConfiguration(); </span><br><span class="line">config.setTimeToIdleSeconds(<span class="number">60</span>); </span><br><span class="line">config.setTimeToLiveSeconds(<span class="number">120</span>); </span><br><span class="line">config.setmaxEntriesLocalHeap(<span class="number">10000</span>); </span><br><span class="line">config.setmaxEntriesLocalDisk(<span class="number">1000000</span>);</span><br><span class="line">也可以通过disableDynamicFeatures()方式关闭动态配置开关。配置以后你将无法再以编程方式配置参数。</span><br><span class="line"></span><br><span class="line">Cache cache = manager.getCache(<span class="string">&quot;sampleCache&quot;</span>); </span><br><span class="line">cache.disableDynamicFeatures();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>​    其他</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CacheManager manager = CacheManager.newInstance(<span class="string">&quot;src/config/ehcache.xml&quot;</span>);</span><br><span class="line"></span><br><span class="line">Ehcache cache = <span class="keyword">new</span> Cache(<span class="string">&quot;testCache&quot;</span>, <span class="number">5000</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="number">5</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">cacheManager.addCache(cache);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="测试用例："><a href="#测试用例：" class="headerlink" title="测试用例："></a>测试用例：</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shuixiou1/article/details/79719220">(37条消息) ehcache缓存过期时间和注解的使用。_shuixiou1的博客-CSDN博客_ehcache过期时间</a></p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h5 id="Redis介绍："><a href="#Redis介绍：" class="headerlink" title="Redis介绍："></a>Redis介绍：</h5><blockquote>
+<p>Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。Redis是一个key-value存储系统。它支持存储的value类型很多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。Redis数据都是缓存在内存中。Redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
+</blockquote>
+<h5 id="Redis的特点："><a href="#Redis的特点：" class="headerlink" title="Redis的特点："></a>Redis的特点：</h5><blockquote>
+<p>（1）速度快，持久化。并且Redis的所有数据都存储在内存中。</p>
+<p>（2）支持多种数据结构例：String、List、Set、Hash、Zset</p>
+<p>（3）支持多种编程语言例：Java、php、Python、Ruby、Lua、Node.js</p>
+<p>（4）功能丰富 ，除了支持五种数据结构之外，还支持事务、流水线、发布/订阅、消息队列等功能。</p>
+<p>（5）主服务器（master）执行添加、修改、删除，从服务器执行查询。</p>
+</blockquote>
+<h2 id="memcache"><a href="#memcache" class="headerlink" title="memcache:"></a>memcache:</h2><p><a target="_blank" rel="noopener" href="https://www.51cto.com/article/595394.html">Ehcache、Memcache、Redis三大缓存比较-51CTO.COM</a></p>
+<p>memcache 是一种高性能、分布式对象缓存系统，最初设计于缓解动态网站数据库加载数据的延迟性，你可以把它想象成一个大的内存HashTable，就是一个key-value键值缓存</p>
+<h3 id="Memcache特性："><a href="#Memcache特性：" class="headerlink" title="Memcache特性："></a>Memcache特性：</h3><p>1)使用物理内存作为缓存区，可独立运行在服务器上。每个进程最大2G，如果想缓存更多的数据，可以开辟更多的memcache进程（不同端口）或者使用分布式memcache进行缓存，将数据缓存到不同的物理机或者虚拟机上。</p>
+<p>2)使用key-value的方式来存储数据，这是一种单索引的结构化数据组织形式，可使数据项查询时间复杂度为O(1)。</p>
+<p>3)协议简单：基于文本行的协议，直接通过telnet在memcached服务器上可进行存取数据操作，简单，方便多种缓存参考此协议；</p>
+<p>4)基于libevent高性能通信：Libevent是一套利用C开发的程序库，它将BSD系统的kqueue,Linux系统的epoll(Linux2.6内核)等事件处理功能封装成一个接口，与传统的select相比，提高了性能。</p>
+<p>5)内置的内存管理方式：所有数据都保存在内存中，存取数据比硬盘快，当内存满后，通过LRU算法自动删除不使用的缓存，但没有考虑数据的容灾问题，重启服务，所有数据会丢失。</p>
+<p>6)分布式：各个memcached服务器之间互不通信，各自独立存取数据，不共享任何信息。服务器并不具有分布式功能，分布式部署取决于memcache客户端、</p>
+<p>7)缓存策略：Memcached的缓存策略是LRU（最近最少使用）到期失效策略。在memcached内存储数据项时，可以指定它在缓存的失效时间，默认为永久。当memcached服务器用完分配的内时，失效的数据被首先替换，然后也是最近未使用的数据。在LRU中，memcached使用的是一种Lazy Expiration策略，自己不会监控存入的key/vlue对是否过期，而是在获取key值时查看记录的时间戳，检查key/value对空间是否过期，这样可减轻服务器的负载。</p>
+<h3 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h3><ul>
+<li>pid memcache服务器的进程ID</li>
+<li>uptime 服务器已经运行的秒数</li>
+<li>time 服务器当前的unix时间戳</li>
+<li>version memcache版本</li>
+<li>pointer_size 当前操作系统的指针大小(32位系统一般是32bit)</li>
+<li>rusage_user 进程的累计用户时间</li>
+<li>rusage_system 进程的累计系统时间</li>
+<li>curr_items 服务器当前存储的items数量</li>
+<li>total_items 从服务器启动以后存储的items总数量</li>
+<li>bytes 当前服务器存储items占用的字节数</li>
+<li>curr_connections 当前打开着的连接数</li>
+<li>total_connections 从服务器启动以后曾经打开过的连接数</li>
+<li>connection_structures 服务器分配的连接构造数</li>
+<li>cmd_get get命令 (获取)总请求次数</li>
+<li>cmd_set set命令 (保存)总请求次数</li>
+<li>get_hits 总***次数</li>
+<li>get_misses 总未***次数</li>
+<li>evictions 为获取空闲内存而删除的items数(分配给memcache的空间用满后需要删除旧的items来得到空间分配给新的items)</li>
+<li>bytes_read 读取字节数(请求字节数)</li>
+<li>bytes_written 总发送字节数(结果字节数)</li>
+<li>limit_maxbytes 分配给memcache的内存大小(字节)</li>
+<li>threads 当前线程数</li>
+</ul>
+<h2 id="Memcahe与Ehcahe区别"><a href="#Memcahe与Ehcahe区别" class="headerlink" title="Memcahe与Ehcahe区别"></a>Memcahe与Ehcahe区别</h2><p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20220313182720360.png" alt="image-20220313182720360"></p>
+<h2 id="简单地比较Redis与Memcached的区别"><a href="#简单地比较Redis与Memcached的区别" class="headerlink" title="简单地比较Redis与Memcached的区别"></a>简单地比较Redis与Memcached的区别</h2><ol>
+<li>Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的存储。</li>
+<li>Redis支持数据的备份，即master-slave模式的数据备份。</li>
+<li>Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。</li>
+</ol>
+<p>在Redis中，并不是所有的数据都一直存储在内存中的。这是和Memcached相比一个最大的区别。Redis只会缓存所有的key的信息，如果Redis发现内存的使用量超过了某一个阀值，将触发swap的操作，Redis根据“swappability = age*log(size_in_memory)”计算出哪些key对应的value需要swap到磁盘。然后再将这些key对应的value持久化到磁盘中，同时在内存中清除。这种特性使得Redis可以保持超过其机器本身内存大小的数据。当然，机器本身的内存必须要能够保持所有的key，毕竟这些数据是不会进行swap操作的。同时由于Redis将内存中的数据swap到磁盘中的时候，提供服务的主线程和进行swap操作的子线程会共享这部分内存，所以如果更新需要swap的数据，Redis将阻塞这个操作，直到子线程完成swap操作后才可以进行修改。</p>
+<p>当从Redis中读取数据的时候，如果读取的key对应的value不在内存中，那么Redis就需要从swap文件中加载相应数据，然后再返回给请求方。这里就存在一个I/O线程池的问题。在默认的情况下，Redis会出现阻塞，即完成所有的swap文件加载后才会相应。这种策略在客户端的数量较小，进行批量操作的时候比较合适。但是如果将Redis应用在一个大型的网站应用程序中，这显然是无法满足大并发的情况的。所以Redis运行我们设置I/O线程池的大小，对需要从swap文件中加载相应数据的读取请求进行并发操作，减少阻塞的时间。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liang-io/p/10322718.html#_labelTop">回到顶部</a></p>
+<h2 id="Redis-和Memcache各方面介绍区别"><a href="#Redis-和Memcache各方面介绍区别" class="headerlink" title="Redis 和Memcache各方面介绍区别"></a>Redis 和Memcache各方面介绍区别</h2><ol>
+<li>性能：TPS方面redis和memcache差不多，redis：单核，因此在大数据量的情况下，略逊色于Memcache， Memcache：多核，多线程，性能强劲，但是在数据量不大时，优势不明显</li>
+<li>操作的便利性：memcache数据结构单一，redis丰富一些，数据操作方面，redis更好一些，较少的网络IO次数</li>
+<li>内存空间的大小和数据量的大小：redis在2.0版本后增加了自己的VM特性，突破物理内存的限制；可以对key value设置过期时间（类似memcache）。memcache可以修改最大可用内存,采用LRU算法</li>
+<li>可用性（单点问题）：对于单点问题，redis，依赖客户端来实现分布式读写；主从复制时，每次从节点重新连接主节点都要依赖整个快照,无增量复制，因性能和效率问题，所以单点问题比较复杂；不支持自动sharding,需要依赖程序设定一致hash 机制。一种替代方案是，不用redis本身的复制机制，采用自己做主动复制（多份存储），或者改成增量复制的方式（需要自己实现），一致性问题和性能的权衡。Memcache本身没有数据冗余机制，也没必要；对于故障预防，采用依赖成熟的hash或者环状的算法，解决单点故障引起的抖动问题。</li>
+<li>可靠性（持久化）：对于数据持久化和数据恢复，redis支持（快照、AOF）：依赖快照进行持久化，aof增强了可靠性的同时，对性能有所影响memcache不支持，通常用在做缓存,提升性能；</li>
+<li>数据一致性（事务支持）：Memcache 在并发场景下，用cas保证一致性redis事务支持比较弱，只能保证事务中的每个操作连续执行</li>
+<li>应用场景：　　redis：数据量较小的更性能操作和运算上，memcache：用于在动态系统中减少数据库负载，提升性能;做缓存，提高性能（适合读多写少，对于数据量比较大，可以采用sharding）</li>
+</ol>
+<h2 id="Ehcache-和-Redis的区别有："><a href="#Ehcache-和-Redis的区别有：" class="headerlink" title="Ehcache 和 Redis的区别有："></a>Ehcache 和 Redis的区别有：</h2><p>  前者操作简单易使用，存取速度快，效率更高但是不适合大型的分布式集群部署。</p>
+<p>而后者更适合用于大数据缓存，数据恢复等。</p>
+<p><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/image-20210705180559447.png" alt="image-20210705180559447"></p>
+<h2 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a><strong>应用场景：</strong></h2><p>ehcache直接在jvm虚拟机中缓存，速度快，效率高;但是缓存共享麻烦，集群分布式应用不方便。</p>
+<p>redis是通过socket访问到缓存服务，效率比ecache低，比数据库要快很多，处理集群和分布式缓存方便，有成熟的方案。</p>
+<p>如果是单个应用或者对缓存访问要求很高的应用，用ehcache。</p>
+<p>如果是大型系统，存在缓存共享、分布式部署、缓存内容很大的，建议用redis。</p>
+<p>补充下：ehcache也有缓存共享方案，不过是通过RMI或者Jgroup多播方式进行广播缓存通知更新，缓存共享复杂，维护不方便;简单的共享可以，但是涉及到缓存恢复，大数据缓存，则不合适redis和memcached相比的独特之处：</p>
+<p>1、redis可以用来做存储(storage),而memcached是用来做缓存(cache)这个特点主要因为其有持久化功能</p>
+<p>2、redis中存储的数据有多种结构，而memcached存储的数据只有一种类型“字符串”</p>
+<p><strong>第二种理解:</strong></p>
+<p>**<em>*<em>：两者之间的介绍</em></em></p>
+<p>Redis：属于独立的运行程序，需要单独安装后，使用JAVA中的Jedis来操纵。因为它是独立，所以如果你写个单元测试程序，放一些数据在Redis中，然后又写一个程序去拿数据，那么是可以拿到这个数据的。，</p>
+<p>ehcache：与Redis明显不同，它与java程序是绑在一起的，java程序活着，它就活着。譬如，写一个独立程序放数据，再写一个独立程序拿数据，那么是拿不到数据的。只能在独立程序中才能拿到数据。</p>
+<p><strong>第二：使用及各种配置：</strong></p>
+<p>两者都可以集群：</p>
+<p>1.Redis可以做主从来集群，例如，在A电脑上装个Redis，作为主库;在其他电脑上装Redis，作为从库;这样主库拥有读和写的功能，而从库只拥有读的功能。每次主库的数据都会同步到从库中。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">JIn</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/03/13/Redis%E5%92%8CMecahe%E7%9A%84%E7%AE%80%E4%BB%8B/">http://example.com/2022/03/13/Redis%E5%92%8CMecahe%E7%9A%84%E7%AE%80%E4%BB%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">little_kim</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/EhCache/">EhCache</a><a class="post-meta__tags" href="/tags/Redis/">Redis</a><a class="post-meta__tags" href="/tags/Mecahe/">Mecahe</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041438071.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/13/Guava%E5%AD%A6%E4%B9%A0/"><img class="prev-cover" src="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041439031.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Guava学习</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/13/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A8/"><img class="next-cover" src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/202201042027723.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java双端队列Deque使用详解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/10/EhCache%E7%8E%AF%E5%A2%83%E7%9B%AE%E5%BD%95%20/" title="【转】使用 EhCache 关于临时目录的一个注意事项"><img class="cover" src="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041438457.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-10</div><div class="title">【转】使用 EhCache 关于临时目录的一个注意事项</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NTEyNi8zMTU5NA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JIn</div><div class="author-info__description">欢迎访问</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JInsir200" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">小金的博客上线啦</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E3%80%81Mecahe%E3%80%81EhCache%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Redis、Mecahe、EhCache的简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ehcache"><span class="toc-number">1.1.</span> <span class="toc-text">Ehcache</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Ehcache-%E7%AE%80%E4%BB%8B%EF%BC%9A"><span class="toc-number">1.1.0.0.1.</span> <span class="toc-text">Ehcache 简介：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Ehcache%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.1.0.0.2.</span> <span class="toc-text">Ehcache的特点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Ehcache%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">1.1.0.0.3.</span> <span class="toc-text">Ehcache配置：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#ehcache-xml%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.0.0.3.1.</span> <span class="toc-text">ehcache.xml配置参数说明</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#API%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.0.0.3.2.</span> <span class="toc-text">API方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">测试用例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis"><span class="toc-number">1.2.</span> <span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Redis%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">Redis介绍：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Redis%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">Redis的特点：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memcache"><span class="toc-number">1.3.</span> <span class="toc-text">memcache:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Memcache%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">Memcache特性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">文件配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Memcahe%E4%B8%8EEhcahe%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.</span> <span class="toc-text">Memcahe与Ehcahe区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%9C%B0%E6%AF%94%E8%BE%83Redis%E4%B8%8EMemcached%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.5.</span> <span class="toc-text">简单地比较Redis与Memcached的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-%E5%92%8CMemcache%E5%90%84%E6%96%B9%E9%9D%A2%E4%BB%8B%E7%BB%8D%E5%8C%BA%E5%88%AB"><span class="toc-number">1.6.</span> <span class="toc-text">Redis 和Memcache各方面介绍区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ehcache-%E5%92%8C-Redis%E7%9A%84%E5%8C%BA%E5%88%AB%E6%9C%89%EF%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">Ehcache 和 Redis的区别有：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-number">1.8.</span> <span class="toc-text">应用场景：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/03/13/%E6%B5%8B%E8%AF%95%E4%BA%8C/" title="测试逻辑基础"><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041355284.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试逻辑基础"/></a><div class="content"><a class="title" href="/2022/03/13/%E6%B5%8B%E8%AF%95%E4%BA%8C/" title="测试逻辑基础">测试逻辑基础</a><time datetime="2022-03-13T12:13:58.401Z" title="发表于 2022-03-13 20:13:58">2022-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/13/starUML%E4%BD%BF%E7%94%A8/" title="starUML使用"><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041440795.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="starUML使用"/></a><div class="content"><a class="title" href="/2022/03/13/starUML%E4%BD%BF%E7%94%A8/" title="starUML使用">starUML使用</a><time datetime="2022-03-13T12:13:58.397Z" title="发表于 2022-03-13 20:13:58">2022-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/13/Guava%E5%AD%A6%E4%B9%A0/" title="Guava学习"><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041439031.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Guava学习"/></a><div class="content"><a class="title" href="/2022/03/13/Guava%E5%AD%A6%E4%B9%A0/" title="Guava学习">Guava学习</a><time datetime="2022-03-13T12:04:07.157Z" title="发表于 2022-03-13 20:04:07">2022-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/13/Redis%E5%92%8CMecahe%E7%9A%84%E7%AE%80%E4%BB%8B/" title="Redis、Mecahe、EhCache的简介"><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/piggo/202201041438071.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis、Mecahe、EhCache的简介"/></a><div class="content"><a class="title" href="/2022/03/13/Redis%E5%92%8CMecahe%E7%9A%84%E7%AE%80%E4%BB%8B/" title="Redis、Mecahe、EhCache的简介">Redis、Mecahe、EhCache的简介</a><time datetime="2022-03-13T09:54:48.377Z" title="发表于 2022-03-13 17:54:48">2022-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/13/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A8/" title="Java双端队列Deque使用详解"><img src="https://gitee.com/jwz--jwz/cloud-img/raw/master/image/202201042027723.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java双端队列Deque使用详解"/></a><div class="content"><a class="title" href="/2022/03/13/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A8/" title="Java双端队列Deque使用详解">Java双端队列Deque使用详解</a><time datetime="2022-03-13T09:21:57.485Z" title="发表于 2022-03-13 17:21:57">2022-03-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By JIn</div><div class="footer_custom_text">你将不再是道具，而是人如其名</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (true) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"display":{"position":"right"},"mobile":{"show":false},"model":{"scale":1.2,"jsonPath":"/live2d_models/assets/violet.model.json"},"log":false});</script></body></html>
